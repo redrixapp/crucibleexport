@@ -130,10 +130,14 @@ void main(List<String> args) async {
         reports.add(container);
       } catch(e) {
         print("Could not retrieve activity : $id");
-        failedCount++
+        failedCount++;
       }
     }
   }
+
+  reports.sort((a,b){
+    return a.report.period.compareTo(b.report.period);
+  });
 
   if(failedCount > 0) {
     print("WARNING: $failedCount ${failedCount == 1?"activity":"activities"} could not be retrieved.");
