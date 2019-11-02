@@ -366,7 +366,7 @@ class D2Api {
     }
 
     if(debug) {
-      print("$page : ${out.length}");
+      print("Page $page of ${out.length}");
     }
 
     if (out.length == count) {

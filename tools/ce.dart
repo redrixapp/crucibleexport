@@ -116,7 +116,14 @@ void main(List<String> args) async {
     }
 
     print("Loading games for ${ClassType.labelFromType(c.classType)}");
-    List<int> ids = await d2api.getActivityIds(member.memberId, platformId, c.id);
+
+    List<int> ids;
+    try {
+      ids = await d2api.getActivityIds(member.memberId, platformId, c.id);
+    } catch(e) {
+      print("Could not retrieve activity ids. ${e.runtimeType}");
+      exit(2);
+    }
 
     print("Found ${ids.length} games for ${ClassType.labelFromType(c.classType)}");
 
