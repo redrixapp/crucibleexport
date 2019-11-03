@@ -21,7 +21,8 @@ import 'package:args/args.dart';
 D2Api d2api;
 String _seperator = ",";
 String _lineSeperator = "\n";
-String _outputPath = "avitivty_history.dart";
+String _outputPath = "activity_history";
+int _downloadBatchCount = 1;
 
 
 void main(List<String> args) async {
@@ -127,18 +128,33 @@ void main(List<String> args) async {
 
     print("Found ${ids.length} games for ${ClassType.labelFromType(c.classType)}");
 
-    int i = 1;
-    for(int id in ids) {
-      print("Loading ${i++} of ${ids.length}");
+    for(int i = 0; i < ids.length;){
 
-      try{
-        GameReport report = await d2api.getPostGameReport(id, c.id);
-        GameReportContainer container = GameReportContainer(classType: c.classType, report: report);
-        reports.add(container);
-      } catch(e) {
-        print("Could not retrieve activity : $id");
-        failedCount++;
+      List<Future> futures = [];
+      int diff = ids.length - i;
+      int max = (diff > _downloadBatchCount)?_downloadBatchCount:diff;
+
+      for(int k = 0; k < max; k++) {
+        print("Loading ${i} of ${ids.length}");
+        int id = ids[i];
+
+        Future<void> Function() f = () async {
+          try{
+            GameReport report = await d2api.getPostGameReport(id, c.id);
+            GameReportContainer container = GameReportContainer(classType: c.classType, report: report);
+            reports.add(container);
+          } catch(e) {
+            print("Could not retrieve activity : $id");
+            failedCount++;
+          }
+        };
+
+        futures.add(f());
+        i++;
       }
+
+      await Future.wait(futures);
+
     }
   }
 
@@ -287,6 +303,7 @@ void printUsage() {
   print(
     "dart ec.dart --apikey APIKEY --platform [xbox|psn|steam] --tag "
     "[GAMERTAG|STEAM64ID) [--verbose] [--hunter|--titan|--warlock] [--csv|--json] "
+    "[--output OUTPUTPATH]"
     "[--help]"
     );
 }
