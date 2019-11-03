@@ -46,7 +46,7 @@ Note, when exporting as CSV format, medal and weapon information is not included
 
 ## License
 
-Copyright 2019 Mike Chambers, Grant Skinner
-Released under an MIT License
-[https://opensource.org/licenses/MIT](https://opensource.org/licenses/MIT)
+Copyright 2019 Mike Chambers, Grant Skinner  
+Released under an MIT License  
+[https://opensource.org/licenses/MIT](https://opensource.org/licenses/MIT)  
 
