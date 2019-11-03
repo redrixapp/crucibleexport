@@ -18,6 +18,7 @@ dart ce.dart --apikey APIKEY --platform [xbox|psn|steam] --tag [GAMERTAG|STEAM64
 [--verbose]
 [--hunter|--titan|--warlock]
 [--csv|--json]
+[--output OUTPUTPATH]
 [--help]
 ```
 
@@ -38,6 +39,7 @@ This will export crucible data in json format for mesh's hunter playing on xbox,
 * **[--hunter|--titan|--warlock]** : Specify one o
 r more classes which data should be retrieved for. If none are specified, all will be retrieved.
 * **[--csv|--json]** : Data format for exported data. If nothing is specified, data will be exported as csv.
+* **[--output OUTPUTPATH]** Output file path that the file will be saved to. File will have appropriate file extension added to it (csv or json).
 * **[--help]** : Print out help information
 
 Note, when exporting as CSV format, medal and weapon information is not included.
