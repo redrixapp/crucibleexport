@@ -22,7 +22,7 @@ D2Api d2api;
 String _seperator = ",";
 String _lineSeperator = "\n";
 String _outputPath = "activity_history";
-int _downloadBatchCount = 1;
+int _downloadBatchCount = 5;
 
 
 void main(List<String> args) async {
@@ -187,8 +187,6 @@ void main(List<String> args) async {
 }
 
 Future<void> writeJSON(String path, List<GameReportContainer> reports) async {
-
-  StringBuffer jsonBuffer = StringBuffer("{");
 
   StringBuffer b = StringBuffer("[");
   for(GameReportContainer c in reports) {
