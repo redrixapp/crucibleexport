@@ -61,7 +61,8 @@ data broken down by map or game mode.
 #### Usage
 
 ```
-dart ftiler.dart --input JSONDATAFILE [--output OUTPUTPATH] [--type [map|mode]]
+dart ftiler.dart --input JSONDATAFILE [--output OUTPUTPATH] 
+[--type [map|mode]]
 ```
 
 * **--input*** : Specifies the json data file created by ce.dart
@@ -75,7 +76,7 @@ dart ftiler.dart --input JSONDATAFILE [--output OUTPUTPATH] [--type [map|mode]]
 #### Usage
 
 ```
-dart filter.dart --input JSONDATAFILE [--output OUTPUTPATH]
+dart filter.dart --input JSONDATAFILE [--output OUTPUTPATH] [--type [map|mode]]
 ```
 
 
