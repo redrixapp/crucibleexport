@@ -1,3 +1,9 @@
+/*
+ * Copyright 2019 Mike Chambers, Grant Skinner
+ * Released under an MIT License
+ * https://opensource.org/licenses/MIT
+ */
+
 
 import 'dart:convert';
 import 'dart:io';
