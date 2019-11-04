@@ -19,33 +19,33 @@ class GameReport {
   //*********** */
 
 
-  int grenadeKills;
-  int superKills;
-  int meleeKills;
-  int abilityKills;
+  int grenadeKills = 0;
+  int superKills = 0;
+  int meleeKills = 0;
+  int abilityKills = 0;
 
-  int precisionKills;
+  int precisionKills = 0;
 
   int id;
   int result;
   String resultDisplay;
   DateTime period;
 
-  double killsDeaths;
-  double killsDeathsAssists;
-  double efficiency;
-  int kills;
-  int opponentsDefeated;
-  int assists;
-  int deaths;
+  double killsDeaths = 0;
+  double killsDeathsAssists = 0;
+  double efficiency = 0;
+  int kills = 0;
+  int opponentsDefeated = 0;
+  int assists = 0;
+  int deaths = 0;
   bool completed = false;
 
-  double averageScorePerKill;
-  double averageScorePerLife;
-  int activityDurationSeconds;
-  int timePlayedSeconds;
-  int score;
-  int totalMedalsEarned;
+  double averageScorePerKill = 0;
+  double averageScorePerLife = 0;
+  int activityDurationSeconds = 0;
+  int timePlayedSeconds = 0;
+  int score = 0;
+  int totalMedalsEarned = 0;
 
   int teamScore;
   int opponentScore;

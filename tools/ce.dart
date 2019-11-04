@@ -26,6 +26,7 @@ int _downloadBatchCount = 5;
 
 
 void main(List<String> args) async {
+
   ArgParser parser = ArgParser();
 
   parser.addOption("apikey", abbr: "a");
@@ -84,9 +85,6 @@ void main(List<String> args) async {
     print("Error calling API. ${e.runtimeType}");
     exit(2);
   }
-
-  //GameReport report = await d2api.getPostGameReport(1291189975, 2305843009264966984);
-  //exit(1);
 
   List<Character> characters;
 
