@@ -160,22 +160,29 @@ class D2Api {
 
       result.grenadeKills =
           int.parse(extended["weaponKillsGrenade"]["basic"]["displayValue"]);
+
       result.meleeKills =
           int.parse(extended["weaponKillsMelee"]["basic"]["displayValue"]);
+
       result.superKills =
           int.parse(extended["weaponKillsSuper"]["basic"]["displayValue"]);
+
       result.abilityKills =
           int.parse(extended["weaponKillsAbility"]["basic"]["displayValue"]);
 
       result.precisionKills =
           int.parse(extended["precisionKills"]["basic"]["displayValue"]);
 
-      result.totalMedalsEarned =
-          extended["allMedalsEarned"]["basic"]["value"].round();
+      result.totalMedalsEarned = 0;
 
+      if(extended["allMedalsEarned"] != null) {
+        result.totalMedalsEarned = extended["allMedalsEarned"]["basic"]["value"].round();
+      }
+          
 
     } catch (e) {
-      print("PARSING ERROR: getExtendedPostGameReport : parsing extended : $e");
+    
+      print("PARSING ERROR: getPostGameReport : parsing extended : $e");
     }
 
     Map<String, dynamic> values;
@@ -185,11 +192,21 @@ class D2Api {
 
       result.score = values["score"]["basic"]["value"].round();
       result.kills = values["kills"]["basic"]["value"].round();
-      result.averageScorePerKill =
-          values["averageScorePerKill"]["basic"]["value"];
-      result.deaths = values["deaths"]["basic"]["value"].round();
-      result.averageScorePerLife =
+
+
+      //todo: move
+      if(values["averageScorePerKill"] != null) {
+        result.averageScorePerKill = values["averageScorePerKill"]["basic"]["value"];
+      }
+
+      //todo: move
+      if(values["averageScorePerLife"] != null) {
+        result.averageScorePerLife =
           values["averageScorePerLife"]["basic"]["value"];
+      }
+
+      
+      result.deaths = values["deaths"]["basic"]["value"].round();
       result.completed = values["completed"]["basic"]["value"] == 1.0;
       result.opponentsDefeated =
           values["opponentsDefeated"]["basic"]["value"].round();
@@ -207,7 +224,11 @@ class D2Api {
       //todo: confirm this works with rumble
       result.teamScore = values["teamScore"]["basic"]["value"].round();
 
-      int standing = values["standing"]["basic"]["value"].round();
+      //todo: move
+      int standing = 0;
+      if(values["standing"] != null) {
+        standing = values["standing"]["basic"]["value"].round();
+      }
 
       if (modes.contains(Mode.rumble)) {
         if (standing < 3) {
@@ -238,7 +259,7 @@ class D2Api {
         }
       }
     } catch (e) {
-      print("PARSING ERROR: getExtendedPostGameReport : parsing values : $e");
+      print("PARSING ERROR: getPostGameReport : parsing values : $e");
     }
 
     try {
