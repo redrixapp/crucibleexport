@@ -1,4 +1,4 @@
-# Crucible activity export command line tools
+# Crucible activity command line tools
 
 A collection of Dart based command line tools for aggregating and viewing Destiny 2 
 crucible PVP data.
