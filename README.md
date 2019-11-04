@@ -4,7 +4,7 @@ A collection of Dart based command line tools for aggregating and viewing Destin
 crucible PVP data.
 
 *  **ce.dart** : Downloads and exports historical Destiny 2 Crucible activity data.
-*  **maps.dart** : Takes data from ce.dart and exports map specific views of data.
+*  **filter.dart** : Takes data from ce.dart and exports map specific views of data.
 
 
 ## Included Tools
@@ -53,10 +53,20 @@ r more classes which data should be retrieved for. If none are specified, all wi
 
 Note, when exporting as CSV format, medal and weapon information is not included.
 
-### maps.dart
+### filter.dart
 
-maps.dart takes json data exported from ce.dart, and creates a CSV file which aggregates crucible
-data broken down by crucible map.
+filter.dart takes json data exported from ce.dart, and creates a CSV file which aggregates crucible
+data broken down by map or game mode.
+
+#### Usage
+
+```
+dart ftiler.dart --input JSONDATAFILE [--output OUTPUTPATH] [--type [map|mode]]
+```
+
+* **--input*** : Specifies the json data file created by ce.dart
+* **--output** : Specifies the base name for the generated CSV file with filtered data.
+* **--type [map|mode]** : Specifies whether to filter by map or game mode. Defaults to map.
 
 #### Prerequisites
 
@@ -65,7 +75,7 @@ data broken down by crucible map.
 #### Usage
 
 ```
-dart maps.dart --input JSONDATAFILE [--output OUTPUTPATH]
+dart filter.dart --input JSONDATAFILE [--output OUTPUTPATH]
 ```
 
 

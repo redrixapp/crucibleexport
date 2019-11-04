@@ -7,13 +7,14 @@ import 'package:args/args.dart';
 String _seperator = ",";
 String _lineSeperator = "\n";
 
-String _outputPath = "map_history";
+String _outputPath = "item_history";
 
 void main(List<String> args) async {
   ArgParser parser = ArgParser();
 
   parser.addOption("input", abbr: "i");
   parser.addOption("output", abbr: "o");
+  parser.addOption("type", abbr: "t");
 
   ArgResults results;
   try {
@@ -33,21 +34,26 @@ void main(List<String> args) async {
     _outputPath = results["output"];
   }
 
+  String filterType = "mapName";
+  if(results["type"] == "mode") {
+    filterType = "modeName";
+  }
+
   Map<String, dynamic> jData = await loadData(inputPath);
 
   List<dynamic> reports = jData["reports"];
 
-  Map<String, MapData> maps = {};
+  Map<String, ItemData> maps = {};
   for(Map r in reports) {
 
     Map report = r["report"];
-    String mapName = report["mapName"];
+    String itemName = report[filterType];
 
-    MapData d = maps[mapName];
+    ItemData d = maps[itemName];
 
     if(d == null) {
-      d = MapData(name:mapName);
-      maps[mapName] = d;
+      d = ItemData(name:itemName);
+      maps[itemName] = d;
     }
 
     d.kills += report["kills"];
@@ -73,7 +79,7 @@ void main(List<String> args) async {
 
 void printUsage() {
   print(
-    "dart maps.dart --input JSONDATAFILE [--output OUTPUTPATH]"
+    "dart ftiler.dart --input JSONDATAFILE [--output OUTPUTPATH] [--type [map|mode]]"
     );
 }
 
@@ -103,7 +109,7 @@ String createCSVHeader() {
       return out;
 }
 
-String createCSVRow(MapData map) {
+String createCSVRow(ItemData map) {
 
   String out = "${map.name}$_seperator"
         "${map.count}$_seperator"
@@ -128,11 +134,11 @@ String createCSVRow(MapData map) {
       return out;
 }
 
-Future<void> writeCSV(String path, Map<String, MapData> maps) async {
+Future<void> writeCSV(String path, Map<String, ItemData> maps) async {
 
   StringBuffer buffer = StringBuffer(createCSVHeader());
 
-  maps.forEach((k, MapData v){
+  maps.forEach((k, ItemData v){
     buffer.write(createCSVRow(v));
   });
 
@@ -164,7 +170,7 @@ Future<Map<String, dynamic>> loadData(String path) async {
   return out;
 }
 
-class MapData {
+class ItemData {
   String name;
   int kills = 0;
   int deaths = 0;
@@ -179,5 +185,5 @@ class MapData {
   int precisionKills = 0;
   int superKills = 0;
 
-  MapData({this.name});
+  ItemData({this.name});
 }
