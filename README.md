@@ -4,7 +4,7 @@ A collection of Dart based command line tools for aggregating and viewing Destin
 crucible PVP data.
 
 *  **ce.dart** : Downloads and exports historical Destiny 2 Crucible activity data.
-*  **filter.dart** : Takes data from ce.dart and exports map specific views of data.
+*  **filter.dart** : Takes data from ce.dart and exports map and mode specific views of data.
 
 
 ## Included Tools
